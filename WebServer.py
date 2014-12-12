@@ -23,7 +23,7 @@ def render(project, start, end):
 # To fetch an image
 @app.route('/image/<project>/<frame>')
 def image(project, frame):
-    return send_file("/home/rhodin/projects/%s/render/%s.jpg" % (project, frame.zfill(4)),
+    return send_file("/home/rhodin/renders/%s/%s.jpg" % (project, frame.zfill(4)),
                      attachment_filename='logo.png',
                      mimetype='image/png')
 
