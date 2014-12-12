@@ -3,7 +3,7 @@ import pika
 import os
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='localhost'))
+        host='webserver.local'))
 channel = connection.channel()
 
 channel.queue_declare(queue='render')
