@@ -6,6 +6,8 @@ A webserver is used as the master server to hold project files and finished rend
 
 Many rendernodes can be launched and will automatically connect back to the webserver to recieve render requests.
 
+NOTE: To test the system, you must first manually make an ssh connection from the first render node to the webserver. Once this is done, replace the included ssh/known_hosts file with the /home/rhodin/.ssh/known_hosts file from that rendernode. WITHOUT THIS REMOTE CONNECTIONS WILL FAIL.
+
 To test the system:
 Launch the webserver using startweb.sh
 Launch a rendernode using startnode.sh
