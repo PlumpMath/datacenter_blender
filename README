@@ -1,0 +1,16 @@
+This is a project by Ludvig Rhodin for CSCI4830 Datacenter Scale Computing.
+
+The purpose of the project was to quickly build a datacenter scale cloud rendering framework for Blender3D.
+
+A webserver is used as the master server to hold project files and finished renders. You can upload projects, request renders, and dowload the renders RESTfully from here.
+
+Many rendernodes can be launched and will automatically connect back to the webserver to recieve render requests.
+
+To test the system:
+Launch the webserver using startweb.sh
+Launch a rendernode using startnode.sh
+Upload the test project using 'upload.sh untitled.zip'
+Render the project using 'render.sh untitled 1 10'
+Download a sample image using 'image.sh untitled 1'
+
+These test scripts can be used as baselines to make more complicated requests.
