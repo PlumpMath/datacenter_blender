@@ -7,6 +7,7 @@ A webserver is used as the master server to hold project files and finished rend
 Many rendernodes can be launched and will automatically connect back to the webserver to recieve render requests.
 
 To test the system:
+Source openstack credentials.
 Launch the webserver using startweb.sh
 Launch a rendernode using startnode.sh
 Upload the test project using 'upload.sh untitled.zip'
