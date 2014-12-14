@@ -1,0 +1,43 @@
+#cloud-config
+# Add groups to the system
+# The following example adds the ubuntu group with members foo and bar and
+# the group cloud-users.
+
+hostname: webserver
+
+# Add users to the system. Users are added after groups are added.
+users:
+  - default
+  - name: rhodin
+    shell: /bin/bash
+    gecos: Ludvig Rhodin
+    groups: admin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock-passwd: true
+    ssh-authorized-keys:
+         - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCv+d0+c2cdh1QvKAIXAKso6vWt7SDxkDglVkuapf7pRcVl2s0YiXU+eL/wFXEHrnJgVRBawLs540aDW6FqcJrMDTluzzD+S9LN5mcHCKF6AQXc2u+esUDMlSSRiPn4FQSEpL8AC2EjMRaJall/EEAZXk8wqQSW1g8PkCwbLuw3adiFRtU8kL/Qgc/eKWRoFCh/hP1gOhee3ZZSaKeZd/PVR2hkg2f/dgociACMiyMgwJ6GOL33VhaKXIBH+X0nAGrCUcYjdKvGeSNOroA8jhku+ZVYbB/OoDeiRrRqkGNVMuC8GuTyAck+OA3VJs6uODYc0has4e/PjV8wu8YyyT4T igp@sneffels
+         - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/d1EbtL95T5RUZEHriWfQN2lhRAzyo1kjpqzKWsSOSehP6CxWaG86RiSB6/zz89hpduyOYsh8MZ6V2qZuvd/iZdMe1ynkPe2hfYs4KodUStDfhqmHH+z+9OvnybC1lXmlrJhxFiw+i9bwCsAxXajTjOm1QMGhOfGhmOcBubzD5mJ+8HuoGoN9ovgw5vv453GrAy8UHeuj0advj0qJfEGd42h1TEvDgRdYBYFBC9ibmcsKSo7noAPTn9PaI+vu4sBFgmmCSRCjJnRl8GZMR6FySqOJqky4eKpUztlTv/75sqj2BmrDtTda8vISekRLmS3XeUkLSWKs0FkrBU04ICE5 rhodin@bananondorf
+
+apt_mirror: http://ubuntu.cs.utah.edu/ubuntu/
+
+package_update: true
+
+packages:
+   - avahi-daemon
+   - python-pika
+   - python-flask
+   - rabbitmq-server
+   - git
+   - unzip
+
+runcmd:
+   - apt-get update
+   - cd /home/rhodin
+   - git clone https://github.com/banandalf/datacenter_blender.git
+   - cp datacenter_blender/config/rabbitmq.conf /etc/rabbitmq/
+   - chown rhodin:rhodin -R datacenter_blender/
+   - mkdir /home/rhodin/projects
+   - mkdir /home/rhodin/renders
+   - chown rhodin:rhodin /home/rhodin/projects
+   - chown rhodin:rhodin /home/rhodin/renders
+   - sudo -u rhodin python datacenter_blender/WebServer.py
