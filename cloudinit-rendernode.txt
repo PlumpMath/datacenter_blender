@@ -33,7 +33,7 @@ runcmd:
    - chown rhodin:rhodin -R datacenter_blender/
    - cp datacenter_blender/ssh/id_rsa /home/rhodin/.ssh/
    - cp datacenter_blender/ssh/id_rsa.pub /home/rhodin/.ssh/
-   - cp datacenter_blender/ssh/known_hosts /home/rhodin/.ssh/
+   - cp datacenter_blender/ssh/config /home/rhodin/.ssh/
    - chown rhodin:rhodin -R /home/rhodin/.ssh/
    - chmod 600 /home/rhodin/.ssh/id_rsa
    - mkdir /home/rhodin/projects
